@@ -1,0 +1,83 @@
+﻿@using Newtonsoft.Json;
+@using Newtonsoft.Json.Serialization;
+@model WebSiteWordCloud.Models.HomeViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr" ng-app="app">
+
+    <head>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/d3.js"></script>
+        <script src="~/lib/d3.layout.cloud.js"></script>
+        <script src="~/lib/d3.wordcloud.js"></script>
+    </head>
+
+    <body>
+        <form id="world-count-form">
+            <input type="text" name="url" required="required" id="url" />
+            <input type="button" id="getCloud" name="getCloud" value="Go">
+        </form>
+
+        <div id="loading" align="center" style="display:none">
+            <img src="~/images/loading.gif" />
+        </div>
+        <div id="keywords" align="center">
+
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#getCloud").on("click",
+                    function () { 
+                        var d = $("#url").val();
+                        if (!ValidURL(d))
+                            return;
+
+                        $("#loading").show();
+                        $("#keywords").empty();
+                        $.ajax({
+                            url: "/Home/GetWordCloud?url=" + d,
+                            type: 'Get',
+                            success: function (response) {
+                                $("#loading").hide();
+                                d3.wordcloud()
+                                    .size([$(window).width() - 100, $(window).height() - 100])
+                                    .selector('#keywords')
+                                    .words(response)
+                                    .start();
+
+                                $.ajax({
+                                    url: "/Home/SaveWordCloud?url=" + d,
+                                    type: 'Get',
+                                    success: function (e) {
+                                        return;
+                                    }
+                                });
+                                
+                            },
+                            complete: this.resetLoadWaiting
+                        });
+                    });
+            });
+
+            function ValidURL(str) {
+                var pattern = new RegExp("((http|https)(:\/\/))?([a-zA-Z0-9]+[.]{1}){2}[a-zA-z0-9]+(\/{1}[a-zA-Z0-9]+)*\/?", "i");
+                if (!pattern.test(str)) {
+                    alert("Please enter a valid URL.");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+
+
+
+        </script>
+    </body>
+</html>
+
+

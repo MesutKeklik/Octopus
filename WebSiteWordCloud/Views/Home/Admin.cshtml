@@ -1,0 +1,61 @@
+﻿@using Newtonsoft.Json;
+@using Newtonsoft.Json.Serialization;
+@model WebSiteWordCloud.Models.HomeViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr" ng-app="app">
+
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+</head>
+
+<body>
+    <div id="loading" align="center" style="display:none">
+        <img src="~/images/loading.gif" /><br />
+        <span>Table is loading...</span>
+    </div>
+    <div id="wordTable" style="display:none;">
+        <table id="wordFrequencies" class="display" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Word</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#wordTable").hide();
+            $("#loading").show();
+            
+            $.ajax({
+                url: "/Home/GetWordCloudAdmin",
+                type: 'Get',
+                success: function (response) {
+                    $("#loading").hide();
+                    $("#wordTable").show();
+                    $('#wordFrequencies').dataTable({
+                        data: response,
+                        columns: [
+                            { data: 'word' },
+                            { data: 'frequency' }
+                        ]
+                    });
+
+                },
+                complete: this.resetLoadWaiting
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+
