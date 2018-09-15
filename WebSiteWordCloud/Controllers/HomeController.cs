@@ -46,6 +46,11 @@ namespace WebSiteWordCloud.Controllers
             return View();
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         public void SaveWordCloud(string url)
         {
             if (!_memoryCache.TryGetValue<WebPageContent>(url, out WebPageContent content))
