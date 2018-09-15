@@ -13,7 +13,8 @@ I've spent almost 12 hours to finish this project.
 I've faced some difficulties; 
 - Azure and Google Cloud SQL connection 
 - RSACryptoServiceProvider version problem, I had to find an Extension for .Net Core 2.
-- I've kept both public and private keys in db, but private key should be kept in another location.
+
+I've kept both public and private keys in db, but private key should be kept in another location.
 
 I didn't separate client and API in application, but I've implemented Security, Data, Content parts separately. I've used Dependency Injection.
 
