@@ -8,7 +8,7 @@ And client send another request for same url, which is for saving the results.
 
 In first design I've tried to save all words when fetching time but that costs too much time. Decryption and checking the availability (for deciding update/insert) caused bad experience in client's perspective. 
 
-I've spent almost 12 hours to finish this project. 
+I've spent almost 14 hours to finish this project. 
 
 I've faced some difficulties; 
 - Azure and Google Cloud SQL connection 
@@ -20,10 +20,11 @@ I didn't separate client and API in application, but I've implemented Security, 
 
 I've used [Pomelo EntityFramework MySql](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql) Library for database connection.
 
+Also I've used built-in Memory Cache for performance.
+
 ### Source Codes
 https://github.com/MesutKeklik/Octopus
 
 ### Test links
 [Word Cloud Page](http://mesutkeklikoctopus.azurewebsites.net)
 [Admin Page](http://mesutkeklikoctopus.azurewebsites.net/Home/Admin)
-
