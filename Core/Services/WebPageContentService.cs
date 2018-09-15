@@ -25,7 +25,5 @@ namespace Core.Services
                 return result;
             }
         }
-
-
     }
 }
