@@ -14,12 +14,15 @@
         <script src="~/lib/d3.js"></script>
         <script src="~/lib/d3.layout.cloud.js"></script>
         <script src="~/lib/d3.wordcloud.js"></script>
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     </head>
 
     <body>
         <form id="world-count-form">
-            <input type="text" name="url" required="required" id="url" />
-            <input type="button" id="getCloud" name="getCloud" value="Go">
+            <div align="center" style="padding-top: 50px">
+                <input type="text" name="url" class="input-lg" required="required" id="url" placeholder="Please enter a valid url" />
+                <input type="button" id="getCloud" class="input-lg" name="getCloud" value="Get Word Cloud">
+            </div>
         </form>
 
         <div id="loading" align="center" style="display:none">
