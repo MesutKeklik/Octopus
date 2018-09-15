@@ -37,20 +37,5 @@ namespace Core.Services.Extension
 
             rsa.ImportParameters(parameters);
         }
-
-        public static string ToXmlString(this RSACryptoServiceProvider rsa)
-        {
-            RSAParameters parameters = rsa.ExportParameters(true);
-            
-            return string.Format("<RSAKeyValue><Modulus>{0}</Modulus><Exponent>{1}</Exponent><P>{2}</P><Q>{3}</Q><DP>{4}</DP><DQ>{5}</DQ><InverseQ>{6}</InverseQ><D>{7}</D></RSAKeyValue>",
-                Convert.ToBase64String(parameters.Modulus),
-                Convert.ToBase64String(parameters.Exponent),
-                Convert.ToBase64String(parameters.P),
-                Convert.ToBase64String(parameters.Q),
-                Convert.ToBase64String(parameters.DP),
-                Convert.ToBase64String(parameters.DQ),
-                Convert.ToBase64String(parameters.InverseQ),
-                Convert.ToBase64String(parameters.D));
-        }
     }
 }

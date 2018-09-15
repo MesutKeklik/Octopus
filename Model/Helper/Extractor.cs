@@ -40,7 +40,7 @@ namespace Core.Helper
                 "within", "along", "following", "across", "behind", "beyond", "plus", "except", "but",
                 "up", "out", "around", "down", "off", "above", "near"
             };
-            var htmlWords = new List<string> { "nbsp" };
+            var htmlWords = new List<string> { "nbsp", "amp" };
             return articles.Contains(word) || prepositions.Contains(word) || word.Any(char.IsDigit) || htmlWords.Contains(word);
         }
     }
