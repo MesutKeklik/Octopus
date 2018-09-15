@@ -1,4 +1,4 @@
-﻿using Core.Helper;
+﻿using Model.Helper;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
