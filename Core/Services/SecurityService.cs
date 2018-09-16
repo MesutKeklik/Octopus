@@ -13,15 +13,18 @@ namespace Core.Services
     {
         private readonly RNGCryptoServiceProvider _rngCryptoServiceProvider;
 
-        public SecurityService(IConfiguration configuration)
+        public SecurityService()
         {
             _rngCryptoServiceProvider = new RNGCryptoServiceProvider();
         }
 
-        public string ComputeHash(string plainText)
+        public string ComputeHash(string plainText, byte[] saltBytes = null)
         {
-            var saltBytes = new byte[4];
-            _rngCryptoServiceProvider.GetNonZeroBytes(saltBytes);
+            if (saltBytes == null)
+            {
+                saltBytes = new byte[4];
+                _rngCryptoServiceProvider.GetNonZeroBytes(saltBytes);
+            }
 
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
             byte[] plainTextWithSaltBytes =
@@ -57,6 +60,32 @@ namespace Core.Services
 
             return Convert.ToBase64String(hashWithSaltBytes);
         }
+
+        public bool VerifyHash(string plainText, string hashValue)
+        {
+            byte[] hashWithSaltBytes = Convert.FromBase64String(hashValue);
+            int hashSizeInBits, hashSizeInBytes;
+
+            hashSizeInBits = 512;
+
+            hashSizeInBytes = hashSizeInBits / 8;
+
+            if (hashWithSaltBytes.Length < hashSizeInBytes)
+            {
+                return false;
+            }
+
+            byte[] saltBytes = new byte[hashWithSaltBytes.Length - hashSizeInBytes];
+
+            for (int i = 0; i < saltBytes.Length; i++)
+            {
+                saltBytes[i] = hashWithSaltBytes[hashSizeInBytes + i];
+            }
+
+            var expectedHashString = ComputeHash(plainText, saltBytes);
+            return (hashValue == expectedHashString);
+        }
+
 
         public byte[] Encrypt(string publicKey, string plain)
         {
