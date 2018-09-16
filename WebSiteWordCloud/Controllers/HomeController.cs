@@ -28,6 +28,8 @@ namespace WebSiteWordCloud.Controllers
 
         public JsonResult GetWordCloud(string url)
         {
+            if (!url.StartsWith("http"))
+                url = "http://" + url;
             if (!_memoryCache.TryGetValue<WebPageContent>(url, out WebPageContent content))
             {
                 content = _webPageContentService.DownloadWebSitePage(url);
@@ -53,6 +55,8 @@ namespace WebSiteWordCloud.Controllers
 
         public void SaveWordCloud(string url)
         {
+            if (!url.StartsWith("http"))
+                url = "http://" + url;
             if (!_memoryCache.TryGetValue<WebPageContent>(url, out WebPageContent content))
             {
                 content = _webPageContentService.DownloadWebSitePage(url);
