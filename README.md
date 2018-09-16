@@ -32,12 +32,12 @@ https://github.com/MesutKeklik/Octopus
 
 ### Notes
 In this project there are some design flaws; 
+- I should split API, from Web Site Application. HomeController has more meaning than expected, I should done it more simple and less business inside it. 
+- DB ConnectionString should getting from config file, but it is hardcoded now. I get some problems to get it from config file, and I've decided to keep it hardcoded (because of deadline).
+- WebPageContentService just promise the download site from given url, but it also should do counting word task. So, that brings another flaw WebPageContent object implements counting word task. If I had more time I'd fix it.
 
-I should split API, from Web Site Application. HomeController has more meaning than expected, I should done it more simple and less business inside it. 
-DB ConnectionString should getting from config file, but it is hardcoded now. I get some problems to get it from config file, and I've decided to keep it hardcoded (because of deadline).
-WebPageContentService just promise the download site from given url, but it also should do counting word task. So, that brings another flaw WebPageContent object implements counting word task. If I had more time I'd fix it.
-
-I couldn't bind the Entity Framework properly and I had to use another library (that is still entity framework but specialized, I've mentioned above) community used and almost 820k downloaded in nuget. 
+Another point; I think it is not a flaw but I ahould write something about it;
+- I couldn't bind the Entity Framework properly and I had to use another library (that is still entity framework but specialized, I've mentioned above) community used and almost 820k downloaded in nuget. 
 
 I believe that's all.
 
