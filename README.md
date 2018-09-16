@@ -14,7 +14,7 @@ I've faced some difficulties;
 - Azure and Google Cloud SQL connection 
 - RSACryptoServiceProvider version problem, I had to find an Extension for .Net Core 2.
 
-I've kept both public and private keys in db, but private key should be kept in another location.
+I've kept both public and private keys in db, but private key should be kept in another location. Public key location can be anywhere, but private key's location should be a cold wallet or most importantly it should be offline somewhere.
 
 I didn't separate client and API in application, but I've implemented Security, Data, Content parts separately. I've used Dependency Injection.
 
@@ -27,4 +27,5 @@ https://github.com/MesutKeklik/Octopus
 
 ### Test links
 [Word Cloud Page](http://mesutkeklikoctopus.azurewebsites.net)
+
 [Admin Page](http://mesutkeklikoctopus.azurewebsites.net/Home/Admin)
